@@ -10,17 +10,20 @@ export const useUserStore = defineStore("users", {
   actions: {
     create(user) {
       this.users.push({
+        id: uuid(),
         ...user,
       });
     },
-    delete (id) {
-      this.users = this.users.filter(user => user.id !== id);
-    }
+    delete(id) {
+      this.users = this.users.filter((user) => user.id !== id);
+    },
   },
   getters: {
-    usersByName (state) {
-      const sortable = [...state.users]
-      return sortable.sort((a, b) => a.name.localeCompare(b.name))
-    }
-  }
+    usersByName(state) {
+      const sortable = [...state.users];
+      return sortable.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+    },
+  },
 });
